@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1037924320355",
+    "project_id": "whos-that-mon",
+    "storage_bucket": "whos-that-mon.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1037924320355:android:3c116ac38bc77c41cf2456",
+        "android_client_info": {
+          "package_name": "com.poe.whosthatmon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1037924320355-09r5l0jmjcs2ofi27mgeobd6oc2idba8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUrI1MIAwXPmFSk2pN67_Zsxon8CifZXs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1037924320355-09r5l0jmjcs2ofi27mgeobd6oc2idba8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
