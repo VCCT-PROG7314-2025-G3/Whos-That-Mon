@@ -10,7 +10,7 @@ interface PokemonDao {
     suspend fun insertUser(user: UserEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun UnlockedPokemon(Pokemon: UnlockedPokemon)
+    suspend fun unlockedPokemon(Pokemon: UnlockedPokemon)
 
     @Query("SELECT * FROM unlockedpokemon WHERE uid = :uid")
     suspend fun getUnlockedPokemon(uid: String): List<UnlockedPokemon>
