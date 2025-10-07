@@ -1,19 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/kalos_pokedex_wallpaper"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="16dp">
+<!--        android:background="@drawable/pokeball_bg">-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- Title Banner -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/app_title"/>
+
+        <!-- Guess prompt -->
+        <EditText
+            android:id="@+id/etGuess"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_input"
+            android:fontFamily="@font/orange_kid"
+            android:hint="Who is it...?"
+            android:inputType="textCapWords"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <!-- Pokémon Image -->
+        <ImageView
+            android:id="@+id/ivPokemon"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="24dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+
+        <!-- Result Message -->
+        <TextView
+            android:id="@+id/tvResult"
+            android:text=""
+            android:textSize="18sp"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="16dp" />
+
+        <!-- Guess Button -->
+        <Button
+            android:id="@+id/btnSubmitGuess"
+            android:layout_width="181dp"
+            android:layout_height="61dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/button_colour"
+            android:fontFamily="@font/orange_kid"
+            android:text="Submit Guess"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:strokeColor="@color/white"
+            app:strokeWidth="7dp" />
+
+        <!-- Next Pokémon -->
+        <Button
+            android:id="@+id/btnNextPokemon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Next Pokémon"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+</ScrollView>

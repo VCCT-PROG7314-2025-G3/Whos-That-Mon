@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_background"
+    android:orientation="vertical"
+    tools:context=".ui.LoginChoiceActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="443dp"
+        app:srcCompat="@drawable/professor_oak" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/orange_kid"
+        android:text="@string/opening_message"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="256dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/button_colour"
+        android:fontFamily="@font/orange_kid"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="7dp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="256dp"
+        android:layout_height="75dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/button_colour"
+        android:fontFamily="@font/orange_kid"
+        android:text="Register"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:strokeColor="@color/white"
+        app:strokeWidth="7dp" />
+
+</LinearLayout>

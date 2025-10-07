@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Who\'s That Mon</string>
+    <string name="opening_message">“Welcome to the world of POKEMON!”</string>
 </resources>

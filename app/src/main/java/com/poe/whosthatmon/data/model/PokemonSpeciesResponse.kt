@@ -5,11 +5,11 @@ import com.squareup.moshi.Json
 data class PokemonSpeciesResponse(
     val id: Int,
     val name: String,
-    @Json(name = "flavor_text_entries") val flavorTextEntries: List<FlavorTextEntry>
+    @param:Json(name = "flavor_text_entries") val flavorTextEntries: List<FlavorTextEntry>
 )
 
 data class FlavorTextEntry(
-    @Json(name = "flavor_text") val flavorText: String,
+    @param:Json(name = "flavor_text") val flavorText: String,
     val language: LanguageInfo,
     val version: VersionInfo
 )

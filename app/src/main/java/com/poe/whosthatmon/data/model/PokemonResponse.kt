@@ -22,7 +22,7 @@ data class TypeInfo(
 )
 
 data class Sprites(
-    @Json(name = "front_default") val frontDefault: String?
+    @param:Json(name = "front_default") val frontDefault: String?
 )
 
 
