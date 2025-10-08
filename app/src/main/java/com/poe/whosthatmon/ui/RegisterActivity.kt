@@ -3,14 +3,8 @@ package com.poe.whosthatmon.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
-import com.poe.whosthatmon.R
-import com.poe.whosthatmon.databinding.ActivityMainBinding
 import com.poe.whosthatmon.databinding.ActivityRegisterBinding
 
 

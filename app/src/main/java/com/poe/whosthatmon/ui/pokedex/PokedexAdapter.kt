@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.poe.whosthatmon.R
+import com.poe.whosthatmon.data.model.Pokemon
 import com.poe.whosthatmon.data.model.PokemonResponse
 import com.poe.whosthatmon.databinding.PokedexItemLayoutBinding
 
 class PokedexAdapter (
-    private var pokemons: List<PokemonResponse>,
+    private var pokemons: List<Pokemon>,
     private val unlockedIds: List<Int>,
-    private val onItemClick: (PokemonResponse) -> Unit
+    private val onItemClick: (Pokemon) -> Unit
 ) : RecyclerView.Adapter<PokedexAdapter.ViewHolder>() {
 
         inner class ViewHolder(val binding: PokedexItemLayoutBinding) :
@@ -33,12 +34,13 @@ class PokedexAdapter (
 
             with(holder.binding) {
                 if (isUnlocked) {
-                    ivPokemonSprite.load(pokemon.sprites.frontDefault)
+                    ivPokemonSprite.load(pokemon.imageUrl)
                     tvPokemonName.text = pokemon.name.replaceFirstChar { it.uppercase() }
                     tvPokemonNumber.text = "No. ${pokemon.id}"
                     ivPokemonSprite.colorFilter = null
+                    holder.itemView.alpha = 1.0f
                 } else {
-                    ivPokemonSprite.load(pokemon.sprites.frontDefault)
+                    ivPokemonSprite.load(pokemon.imageUrl)
                     val matrix = ColorMatrix(
                         floatArrayOf(
                             0f, 0f, 0f, 0f, 0f,
@@ -51,7 +53,8 @@ class PokedexAdapter (
                     ivPokemonSprite.colorFilter = filter
 
                     tvPokemonName.text = "???"
-                    tvPokemonNumber.text = "No. ?"
+                    tvPokemonNumber.text = "No. ${pokemon.id.toString().padStart(3, '0')}"
+                    holder.itemView.alpha = 0.5f
                 }
 
                 root.setOnClickListener {
@@ -62,7 +65,7 @@ class PokedexAdapter (
 
         override fun getItemCount() = pokemons.size
 
-        fun updateData(newList: List<PokemonResponse>) {
+        fun updateData(newList: List<Pokemon>) {
             pokemons = newList
             notifyDataSetChanged()
         }

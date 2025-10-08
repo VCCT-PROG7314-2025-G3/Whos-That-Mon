@@ -1,8 +1,10 @@
 package com.poe.whosthatmon.data.repository
 
-import com.poe.whosthatmon.data.api.RetrofitInstance
+//import com.poe.whosthatmon.data.api.RetrofitInstance
+import com.poe.whosthatmon.data.LocalPokemonDataSource
 import com.poe.whosthatmon.data.db.PokemonDao
-import com.poe.whosthatmon.data.model.PokemonApiResponse
+import com.poe.whosthatmon.data.model.Pokemon
+//import com.poe.whosthatmon.data.model.PokemonApiResponse
 import com.poe.whosthatmon.data.model.PokemonSpeciesResponse
 import com.poe.whosthatmon.data.model.UnlockedPokemon
 import com.poe.whosthatmon.data.model.UserEntity
@@ -11,37 +13,42 @@ import kotlinx.coroutines.withContext
 
 class PokemonRepository(private val dao: PokemonDao) {
 
-    // Fetch Pokemon info (types, sprites)
-    suspend fun getPokemon(id: Int): PokemonApiResponse = withContext(Dispatchers.IO){
-        RetrofitInstance.api.getPokemon(id)
+    suspend fun getLocalPokemon(): Pokemon = withContext(Dispatchers.IO) {
+        LocalPokemonDataSource.getRandomPokemon()
     }
 
-    // Fetch Pokemon species info (pokedex entries)
-    suspend fun getPokemonSpecies(id: Int): PokemonSpeciesResponse = withContext(Dispatchers.IO) {
-        RetrofitInstance.api.getSpecies(id)
-    }
 
-    // Combine both (Pokemon + Species)
-    suspend fun getFullPokemonData(id: Int): Pair<PokemonApiResponse, String?> = withContext(Dispatchers.IO) {
-        val pokemon = RetrofitInstance.api.getPokemon(id)
-        val species = RetrofitInstance.api.getSpecies(id)
-        val entry = species.flavorTextEntries.firstOrNull { it.language.name == "en" }?.flavorText
-        pokemon to entry
-    }
+//     Fetch Pokemon info (types, sprites)
+//    suspend fun getPokemon(id: Int): PokemonApiResponse = withContext(Dispatchers.IO){
+//        RetrofitInstance.api.getPokemon(id)
+//    }
+//
+//    // Fetch Pokemon species info (pokedex entries)
+//    suspend fun getPokemonSpecies(id: Int): PokemonSpeciesResponse = withContext(Dispatchers.IO) {
+//        RetrofitInstance.api.getSpecies(id)
+//    }
 
-    // Save user locally
-    suspend fun saveUser(user: UserEntity) = withContext(Dispatchers.IO) {
-        dao.insertUser(user)
-    }
-
-    // Mark a Pokemon as unlocked for this user
-    suspend fun unlockPokemon(uid: String, pokemonId: Int) = withContext(Dispatchers.IO) {
-        val unlocked = UnlockedPokemon(uid = uid, pokemonId = pokemonId)
-        dao.unlockedPokemon(unlocked)
-    }
-
-    // Get all unlocked pokemon for a specific user
-    suspend fun getUnlockedPokemon(uid: String): List<UnlockedPokemon> = withContext(Dispatchers.IO) {
-        dao.getUnlockedPokemon(uid)
-    }
+//    // Combine both (Pokemon + Species)
+//    suspend fun getFullPokemonData(id: Int): Pair<PokemonApiResponse, String?> = withContext(Dispatchers.IO) {
+//        val pokemon = RetrofitInstance.api.getPokemon(id)
+//        val species = RetrofitInstance.api.getSpecies(id)
+//        val entry = species.flavorTextEntries.firstOrNull { it.language.name == "en" }?.flavorText
+//        pokemon to entry
+//    }
+//
+//    // Save user locally
+//    suspend fun saveUser(user: UserEntity) = withContext(Dispatchers.IO) {
+//        dao.insertUser(user)
+//    }
+//
+//    // Mark a Pokemon as unlocked for this user
+//    suspend fun unlockPokemon(uid: String, pokemonId: Int) = withContext(Dispatchers.IO) {
+//        val unlocked = UnlockedPokemon(uid = uid, pokemonId = pokemonId)
+//        dao.unlockedPokemon(unlocked)
+//    }
+//
+//    // Get all unlocked pokemon for a specific user
+//    suspend fun getUnlockedPokemon(uid: String): List<UnlockedPokemon> = withContext(Dispatchers.IO) {
+//        dao.getUnlockedPokemon(uid)
+//    }
 }

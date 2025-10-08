@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Intent
 import android.view.View
+import com.poe.whosthatmon.ui.FavouritesList
 
 class PokedexEntry : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -64,6 +64,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+
     // Firebase Auth + Google
     implementation(libs.firebase.auth.ktx)
     implementation(libs.play.services.auth)

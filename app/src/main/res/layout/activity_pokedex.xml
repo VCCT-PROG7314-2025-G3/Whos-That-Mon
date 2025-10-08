@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/pokedex_background"
-    android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Title Image -->
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:id="@+id/ivPokedexTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/app_title" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/app_title" />
 
+    <!-- Search Bar -->
     <EditText
         android:id="@+id/etSearch"
-        android:hint="Search Pokémon..."
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:background="@drawable/rounded_input"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ivPokedexTitle"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_input"
+        android:hint="Search Pokémon..."
+        android:padding="10dp" />
 
+    <!-- RecyclerView fills the space between search and nav bar -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPokedex"
-        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_nav_container"
+        android:layout_below="@id/etSearch"
+        android:layout_marginTop="8dp" />
 
-</LinearLayout>
+    <!-- Bottom Navigation Bar, aligned to the bottom -->
+    <include
+        android:id="@+id/bottom_nav_container"
+        layout="@layout/include_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>
