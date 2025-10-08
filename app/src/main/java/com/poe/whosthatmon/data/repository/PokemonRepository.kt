@@ -2,7 +2,7 @@ package com.poe.whosthatmon.data.repository
 
 import com.poe.whosthatmon.data.api.RetrofitInstance
 import com.poe.whosthatmon.data.db.PokemonDao
-import com.poe.whosthatmon.data.model.PokemonResponse
+import com.poe.whosthatmon.data.model.PokemonApiResponse
 import com.poe.whosthatmon.data.model.PokemonSpeciesResponse
 import com.poe.whosthatmon.data.model.UnlockedPokemon
 import com.poe.whosthatmon.data.model.UserEntity
@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 class PokemonRepository(private val dao: PokemonDao) {
 
     // Fetch Pokemon info (types, sprites)
-    suspend fun getPokemon(id: Int): PokemonResponse = withContext(Dispatchers.IO){
+    suspend fun getPokemon(id: Int): PokemonApiResponse = withContext(Dispatchers.IO){
         RetrofitInstance.api.getPokemon(id)
     }
 
@@ -22,7 +22,7 @@ class PokemonRepository(private val dao: PokemonDao) {
     }
 
     // Combine both (Pokemon + Species)
-    suspend fun getFullPokemonData(id: Int): Pair<PokemonResponse, String?> = withContext(Dispatchers.IO) {
+    suspend fun getFullPokemonData(id: Int): Pair<PokemonApiResponse, String?> = withContext(Dispatchers.IO) {
         val pokemon = RetrofitInstance.api.getPokemon(id)
         val species = RetrofitInstance.api.getSpecies(id)
         val entry = species.flavorTextEntries.firstOrNull { it.language.name == "en" }?.flavorText

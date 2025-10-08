@@ -8,7 +8,8 @@ data class PokemonResponse(
     val height: Int,
     val weight: Int,
     val types: List<TypeSlot>,
-    val sprites: Sprites,
+    val sprites: PokemonSprites,
+    val imageUrl: String
 )
 
 data class TypeSlot(
@@ -21,9 +22,12 @@ data class TypeInfo(
     val url: String
 )
 
-data class Sprites(
-    @Json(name = "front_default") val frontDefault: String?
+data class PokemonSprites(
+    @Json(name = "front_default")
+    val frontDefault: String,
+    val other: OtherSprites
 )
+
 
 
 
