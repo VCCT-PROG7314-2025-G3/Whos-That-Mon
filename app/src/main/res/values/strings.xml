@@ -8,4 +8,8 @@
     <string name="your_trainer_name">Your Trainer Name</string>
     <string name="register">Register</string>
     <string name="log_in">Log In</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="notifications">Notifications</string>
+    <string name="app_settings">App Settings</string>
+    <string name="welcome_trainer">Welcome, Trainer!</string>
 </resources>
