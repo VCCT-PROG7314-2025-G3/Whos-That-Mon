@@ -12,10 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhosThatMon">
         <activity
-            android:name=".ui.pokedex.PokedexActivity"
+            android:name=".AccountScreen"
             android:exported="false" />
         <activity
-            android:name=".ui.SplashActivity"
+            android:name=".FavouritesList"
+            android:exported="false" />
+        <activity
+            android:name=".PokedexEntry"
+            android:exported="false" />
+        <activity
+            android:name=".PokedexList"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreenSuccessfulGuess"
+            android:exported="false" />
+        <activity
+            android:name=".HomeScreenGuess"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
