@@ -4,11 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.poe.whosthatmon.R
 
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        setContentView(R.layout.activity_splash)
 
         // Get the current Firebase user
         val currentUser = FirebaseAuth.getInstance().currentUser

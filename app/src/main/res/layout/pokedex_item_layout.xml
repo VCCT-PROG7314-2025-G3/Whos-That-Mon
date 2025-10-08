@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="@drawable/rounded_input"
+    android:layout_marginVertical="4dp"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ivPokemonSprite"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="12dp"
+        android:adjustViewBounds="true" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvPokemonNumber"
+            android:text="No. ?"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvPokemonName"
+            android:text="Unknown"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -9,11 +9,17 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.poe.whosthatmon.R
+import com.poe.whosthatmon.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
 
-        lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityLoginBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        auth = FirebaseAuth.getInstance()
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

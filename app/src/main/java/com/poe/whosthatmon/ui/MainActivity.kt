@@ -1,37 +1,5 @@
 package com.poe.whosthatmon.ui
 
-//import android.os.Bundle
-//import androidx.activity.enableEdgeToEdge
-//import androidx.appcompat.app.AppCompatActivity
-//import androidx.core.view.ViewCompat
-//import androidx.core.view.WindowInsetsCompat
-//import com.poe.whosthatmon.R
-//import androidx.activity.viewModels
-//import coil.load
-//import com.poe.whosthatmon.databinding.ActivityMainBinding
-//import com.poe.whosthatmon.ui.MainViewModel
-//
-//class MainActivity : AppCompatActivity() {
-//
-//    private lateinit var binding: ActivityMainBinding
-//    private val viewModel: MainViewModel by viewModels()
-//
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContentView(binding.root)
-//
-//        viewModel.randomPokemon.observe(this) { pokemon ->
-//            binding.ivPokemon.load(pokemon.sprites.front_default)
-//            binding.tvPokemonName.text = pokemon.name
-//        }
-//
-//        binding.btnGetPokemon.setOnClickListener {
-//            viewModel.getRandomPokemon()
-//        }
-//    }
-//}
-
 import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -40,32 +8,24 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.semantics.error
-import androidx.compose.ui.semantics.text
-import androidx.glance.visibility
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
-import androidx.room.Room
 import coil.load
 import com.poe.whosthatmon.data.db.AppDatabase
 import com.poe.whosthatmon.data.repository.PokemonRepository
 import com.poe.whosthatmon.databinding.ActivityMainBinding
-import com.poe.whosthatmon.ui.MainViewModel
-import com.poe.whosthatmon.ui.MainViewModelFactory
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.poe.whosthatmon.R
+import kotlin.getValue
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
     private val viewModel: MainViewModel by viewModels {
         val db = AppDatabase.getDatabase(applicationContext)
         val repository = PokemonRepository(db.pokemonDao())
         MainViewModelFactory(repository)
-
     }
+
     private lateinit var auth: FirebaseAuth
     private var currentPokemonName: String? = null
     private var currentPokemonId: Int? = null
@@ -104,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (guess.equals(correctName, ignoreCase = true)) {
+            if (guess.equals(correct, ignoreCase = true)) {
                 revealPokemon()
                 Toast.makeText(this, "It's ${currentPokemonName!!.uppercase()}! You caught it!", Toast.LENGTH_LONG).show()
                 binding.btnNextPokemon.visibility = View.VISIBLE
@@ -126,13 +86,17 @@ class MainActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.pokemon.observe(this) { pokemon ->
             currentPokemonName = pokemon.name
-            binding.ivPokemon.load(pokemon.sprites.frontDefault) {
+            currentPokemonId = pokemon.id
+            // Construct the image URL using the Pokémon's ID
+            val imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png"
+            binding.ivPokemon.load(imageUrl) {
                 // This ensures the silhouette is applied before the image is displayed
                 listener(
                     onStart = {
                         applySilhouette()
                     }
                 )
+                error(R.drawable.pokebal_bg)
             }
         }
 
@@ -148,7 +112,7 @@ class MainActivity : AppCompatActivity() {
                 0f, 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 0f, 0f,
                 0f, 0f, 0f, 0f, 0f,
-                0f, 0f, 0f, 1f, 0f // Alpha channel
+                0f, 0f, 0f, 1f, 0f
             )
         )
         binding.ivPokemon.colorFilter = ColorMatrixColorFilter(matrix)

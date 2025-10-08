@@ -8,22 +8,4 @@
     android:background="@drawable/mon_spash"
     tools:context=".ui.SplashActivity">
 
-    <ImageButton
-        android:id="@+id/login_button"
-        android:layout_width="304dp"
-        android:layout_height="103dp"
-        android:backgroundTint="#ffffff"
-        android:contentDescription="Sign In Button"
-        android:padding="12dp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/button_mon"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.813"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="HardcodedText" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
