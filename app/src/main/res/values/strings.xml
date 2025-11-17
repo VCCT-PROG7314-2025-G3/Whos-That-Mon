@@ -12,4 +12,11 @@
     <string name="notifications">Notifications</string>
     <string name="app_settings">App Settings</string>
     <string name="welcome_trainer">Welcome, Trainer!</string>
+    <string name="logout">Logout</string>
+    <string name="notifications2">Notifications</string>
+    <string name="english">English</string>
+    <string name="language">Language</string>
+    <string name="sync_data">Sync Data</string>
+    <string name="settings2">Settings</string>
+    <string name="biometrics">Biometrics</string>
 </resources>
