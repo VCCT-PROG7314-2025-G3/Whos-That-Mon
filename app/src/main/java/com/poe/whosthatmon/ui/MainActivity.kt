@@ -1,12 +1,12 @@
 package com.poe.whosthatmon.ui
 
-import android.widget.Toast
 import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
@@ -15,7 +15,6 @@ import com.poe.whosthatmon.R
 import com.poe.whosthatmon.data.db.AppDatabase
 import com.poe.whosthatmon.data.repository.PokemonRepository
 import com.poe.whosthatmon.databinding.ActivityMainBinding
-import com.poe.whosthatmon.databinding.IncludeBottomNavBinding
 import com.poe.whosthatmon.ui.pokedex.PokedexActivity
 
 class MainActivity : AppCompatActivity() {
@@ -33,15 +32,14 @@ class MainActivity : AppCompatActivity() {
     private var currentPokemonId: Int? = null
     private var revealed = false
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         auth = FirebaseAuth.getInstance()
-        if (auth.currentUser == null) {
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
             Toast.makeText(this, "Redirecting to login...", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, LoginChoiceActivity::class.java))
             finish()
@@ -50,31 +48,6 @@ class MainActivity : AppCompatActivity() {
 
         setupUI()
         observeViewModel()
-
-        if (savedInstanceState == null) {
-            viewModel.fetchRandomPokemon()
-        }
-
-        val bottomNavView = binding.bottomNavContainer.bottomNavigationView
-
-        bottomNavView.selectedItemId = R.id.nav_home
-
-        bottomNavView.setOnItemSelectedListener { item: MenuItem ->
-            when (item.itemId) {
-                R.id.nav_home -> true // Already here
-                R.id.nav_pokedex -> {
-                    startActivity(Intent(this, PokedexActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    true
-                }
-                R.id.nav_profile -> {
-                    startActivity(Intent(this, AccountScreen::class.java))
-                    overridePendingTransition(0, 0)
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     private fun setupUI() {
@@ -90,33 +63,71 @@ class MainActivity : AppCompatActivity() {
                 binding.btnNextPokemon.visibility = View.VISIBLE
                 binding.etGuess.isEnabled = false
 
+                // Unlock the Pokémon for the current user
+                viewModel.onCorrectGuess(auth.currentUser!!.uid, currentPokemonId!!)
             } else {
                 Toast.makeText(this, "Not quite! Try again!", Toast.LENGTH_SHORT).show()
             }
         }
 
         binding.btnNextPokemon.setOnClickListener {
-            revealed = false
-            binding.etGuess.text.clear()
-            binding.etGuess.isEnabled = true
-            binding.btnNextPokemon.visibility = View.GONE
-            viewModel.fetchRandomPokemon()
+            resetForNextPokemon()
+        }
+
+        val bottomNavView = binding.bottomNavContainer.bottomNavigationView
+        bottomNavView.selectedItemId = R.id.nav_home
+        bottomNavView.setOnItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.nav_home -> true
+                R.id.nav_pokedex -> {
+                    startActivity(Intent(this, PokedexActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, AccountScreen::class.java))
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                else -> false
+            }
         }
     }
 
     private fun observeViewModel() {
-        viewModel.pokemon.observe(this) { pokemon ->
+        // This observes the master list from the database.
+        viewModel.allLocalPokemon.observe(this) { pokemonList ->
+            if (pokemonList.isNotEmpty() && viewModel.randomPokemon.value == null) {
+                // If the list is ready and we haven't picked a Pokémon yet, pick one.
+                viewModel.fetchRandomPokemonFromLocal()
+            } else if (pokemonList.isEmpty()) {
+                // Show a loading/preparation indicator
+                binding.etGuess.hint = "Loading Pokémon..."
+            }
+        }
+
+        // This observes the single random Pokémon chosen for the current round.
+        viewModel.randomPokemon.observe(this) { pokemon ->
+            binding.etGuess.hint = "Who's That Pokémon?"
             currentPokemonName = pokemon.name
             currentPokemonId = pokemon.id
-            val imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png"
-            binding.ivPokemon.load(imageUrl) {
+            binding.ivPokemon.load(pokemon.spriteUrl) {
                 listener(onStart = { applySilhouette() })
                 error(R.drawable.pokebal_bg)
             }
         }
+
         viewModel.error.observe(this) { message ->
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun resetForNextPokemon() {
+        revealed = false
+        binding.etGuess.text.clear()
+        binding.etGuess.isEnabled = true
+        binding.btnNextPokemon.visibility = View.GONE
+        viewModel.fetchRandomPokemonFromLocal()
     }
 
     private fun applySilhouette() {
@@ -130,3 +141,4 @@ class MainActivity : AppCompatActivity() {
         revealed = true
     }
 }
+

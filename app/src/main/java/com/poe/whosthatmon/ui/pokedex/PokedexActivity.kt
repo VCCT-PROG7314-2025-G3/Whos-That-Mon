@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.poe.whosthatmon.R
 import com.poe.whosthatmon.data.LocalPokemonDataSource
-import com.poe.whosthatmon.data.api.RetrofitInstance
 import com.poe.whosthatmon.data.db.AppDatabase
 import com.poe.whosthatmon.data.model.Pokemon
 import com.poe.whosthatmon.databinding.ActivityPokedexBinding

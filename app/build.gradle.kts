@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.poe.whosthatmon"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -87,4 +87,9 @@ dependencies {
 
     // Coil (image loading)
     implementation(libs.coil)
+
+    // PokeAPI Kotlin implementation
+    implementation("com.github.PokeAPI:pokekotlin:2.3.1")
+
+
 }

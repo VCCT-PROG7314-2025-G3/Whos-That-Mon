@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.poe.whosthatmon.data.model.UnlockedPokemon
 import com.poe.whosthatmon.data.model.UserEntity
 
-@Database(entities = [UserEntity::class, UnlockedPokemon::class], version = 1)
+@Database(entities = [UserEntity::class, UnlockedPokemon::class, Pokemon::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun pokemonDao(): PokemonDao
 

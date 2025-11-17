@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.poe.whosthatmon.R
 import com.poe.whosthatmon.data.model.Pokemon
-import com.poe.whosthatmon.data.model.PokemonResponse
 import com.poe.whosthatmon.databinding.PokedexItemLayoutBinding
 
 class PokedexAdapter (
