@@ -24,9 +24,17 @@
         android:hint="Search Pokémon..."
         android:padding="10dp" />
 
+    <TextView
+        android:id="@+id/tvEmptyPokedex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Pokédex is empty!"
+        android:textSize="18sp"
+        android:visibility="gone"/>
+
     <!-- RecyclerView fills the space between search and nav bar -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPokedex"
+        android:id="@+id/recyclerViewPokedex"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_nav_container"

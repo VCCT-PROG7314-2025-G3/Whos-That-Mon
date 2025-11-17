@@ -1,42 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:padding="10dp"
-    android:background="@drawable/rounded_input"
-    android:layout_marginVertical="4dp"
-    android:gravity="center_vertical"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
 
-    <ImageView
-        android:id="@+id/ivPokemonSprite"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_marginEnd="12dp"
-        android:adjustViewBounds="true" />
-
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tvPokemonNumber"
-            android:text="No. ?"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+        <ImageView
+            android:id="@+id/ivPokemonSprite"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/pokebal_bg" />
 
         <TextView
             android:id="@+id/tvPokemonName"
-            android:text="Unknown"
-            android:textColor="#000"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content" />
+            android:layout_marginStart="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivPokemonSprite"
+            app:layout_constraintTop_toTopOf="@id/ivPokemonSprite"
+            tools:text="Bulbasaur" />
 
-    </LinearLayout>
-</LinearLayout>
+        <TextView
+            android:id="@+id/tvPokemonNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/tvPokemonName"
+            app:layout_constraintTop_toBottomOf="@id/tvPokemonName"
+            tools:text="#001" />
+
+        <!-- NEW: TextView for Types -->
+        <TextView
+            android:id="@+id/tvPokemonTypes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tvPokemonNumber"
+            app:layout_constraintTop_toBottomOf="@id/tvPokemonNumber"
+            tools:text="Grass, Poison" />
+
+        <!-- NEW: TextView for Stats -->
+        <TextView
+            android:id="@+id/tvPokemonStats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivPokemonSprite"
+            tools:text="HP: 45, Atk: 49, Def: 49" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

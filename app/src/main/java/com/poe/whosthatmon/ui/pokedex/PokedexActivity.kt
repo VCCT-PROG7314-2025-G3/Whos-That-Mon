@@ -3,52 +3,72 @@ package com.poe.whosthatmon.ui.pokedex
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+//import androidx.glance.visibility
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.poe.whosthatmon.R
-import com.poe.whosthatmon.data.LocalPokemonDataSource
 import com.poe.whosthatmon.data.db.AppDatabase
-import com.poe.whosthatmon.data.model.Pokemon
+import com.poe.whosthatmon.data.repository.PokemonRepository
 import com.poe.whosthatmon.databinding.ActivityPokedexBinding
 import com.poe.whosthatmon.ui.AccountScreen
+import com.poe.whosthatmon.ui.LoginChoiceActivity
 import com.poe.whosthatmon.ui.MainActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class PokedexActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPokedexBinding
-    private lateinit var adapter: PokedexAdapter
-    private val allPokemon = mutableListOf<Pokemon>()
-    private val unlockedIds = mutableListOf<Int>()
     private lateinit var auth: FirebaseAuth
 
+    private val viewModel: PokedexViewModel by viewModels {
+        val db = AppDatabase.getDatabase(applicationContext)
+        val repository = PokemonRepository(db.pokemonDao())
+        PokedexViewModelFactory(repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPokedexBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         auth = FirebaseAuth.getInstance()
-
-
-        adapter = PokedexAdapter(allPokemon, unlockedIds) { selected ->
-            val intent = Intent(this, PokedexDetailActivity::class.java)
-            intent.putExtra("POKEMON_ID", selected.id)
-            startActivity(intent)
+        val currentUser = auth.currentUser
+        if (currentUser == null) {
+            startActivity(Intent(this, LoginChoiceActivity::class.java))
+            finish()
+            return
         }
 
-        binding.rvPokedex.layoutManager = LinearLayoutManager(this)
-        binding.rvPokedex.adapter = adapter
+        setupRecyclerView()
+        setupBottomNav()
+        observeViewModel()
 
-        loadPokedexFromLocalSource()
+        // Fetch data for the current user
+        viewModel.fetchUnlockedPokemonData(currentUser.uid)
+    }
 
+    private fun setupRecyclerView() {
+        binding.recyclerViewPokedex.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun observeViewModel() {
+        viewModel.unlockedPokemonDetails.observe(this) { unlockedList ->
+            if (unlockedList.isEmpty()) {
+                binding.tvEmptyPokedex.visibility = View.VISIBLE
+                binding.recyclerViewPokedex.visibility = View.GONE
+            } else {
+                binding.tvEmptyPokedex.visibility = View.GONE
+                binding.recyclerViewPokedex.visibility = View.VISIBLE
+                binding.recyclerViewPokedex.adapter = PokedexAdapter(unlockedList)
+            }
+        }
+    }
+
+    private fun setupBottomNav() {
         val bottomNavView = binding.bottomNavContainer.bottomNavigationView
-
         bottomNavView.selectedItemId = R.id.nav_pokedex
-
         bottomNavView.setOnItemSelectedListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.nav_pokedex -> true // Already here
@@ -63,25 +83,6 @@ class PokedexActivity : AppCompatActivity() {
                     true
                 }
                 else -> false
-            }
-        }
-    }
-
-    private fun loadPokedexFromLocalSource() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            // 1. Load unlocked IDs from Room
-            val db = AppDatabase.getDatabase(applicationContext)
-            val unlocked = db.pokemonDao().getUnlockedPokemon("yourUserId")
-            unlockedIds.clear()
-            unlockedIds.addAll(unlocked.map { it.pokemonId })
-
-            // 2. Load all Pokémon directly from the local data source
-            val localPokemonList = LocalPokemonDataSource.getAllPokemon()
-            allPokemon.clear()
-            allPokemon.addAll(localPokemonList)
-
-            withContext(Dispatchers.Main) {
-                adapter.updateData(allPokemon)
             }
         }
     }

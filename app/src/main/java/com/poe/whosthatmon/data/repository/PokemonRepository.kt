@@ -57,6 +57,15 @@ class PokemonRepository(private val pokemonDao: PokemonDao) {
     }
 
     /**
+     * Retrieves a list of UnlockedPokemon objects for a specific user from the local database.
+     */
+    suspend fun getUnlockedPokemon(uid: String): List<UnlockedPokemon> {
+        return withContext(Dispatchers.IO) {
+            pokemonDao.getUnlockedPokemon(uid)
+        }
+    }
+
+    /**
      * Fetches detailed information for the Pokédex screen.
      * This is an ONLINE-only operation.
      */

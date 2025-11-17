@@ -12,8 +12,6 @@ import com.poe.whosthatmon.databinding.ActivityAccountScreenBinding
 import com.poe.whosthatmon.ui.MainActivity
 import com.poe.whosthatmon.ui.pokedex.PokedexActivity
 
-
-
 class AccountScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivityAccountScreenBinding
