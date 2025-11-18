@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Who\'s That Mon</string>
+    <string name="opening_message">Wamkelekile kwihlabathi le-POKEMON!”</string>
+    <string name="email_address">Idilesi ye-imeyile</string>
+    <string name="login">Ngena</string>
+    <string name="password">Iphasiwedi</string>
+    <string name="sign_up">Bhalisa</string>
+    <string name="your_trainer_name">Igama Lakho Lomqeqeshi</string>
+    <string name="register">Bhalisa</string>
+    <string name="log_in">Ngena</string>
+    <string name="contact_us">Qhagamshelana nathi</string>
+    <string name="notifications">Izaziso</string>
+    <string name="app_settings">Iisetingi zosetyenziso</string>
+    <string name="welcome_trainer">Wamkelekile, Mqeqeshi!</string>
+    <string name="logout">Phuma</string>
+    <string name="notifications2">Izaziso</string>
+    <string name="english">IsiNgesi</string>
+    <string name="language">Ulwimi</string>
+    <string name="sync_data">Dibanisa idatha</string>
+    <string name="settings2">Iisetingi</string>
+    <string name="biometrics">I-Biometrics</string>
+</resources>

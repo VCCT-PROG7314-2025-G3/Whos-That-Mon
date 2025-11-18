@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Who\'s That Mon</string>
+    <string name="opening_message">“Welkom by die wêreld van POKEMON!”</string>
+    <string name="email_address">E-posadres</string>
+    <string name="login">Teken in</string>
+    <string name="password">Wagwoord</string>
+    <string name="sign_up">Teken aan</string>
+    <string name="your_trainer_name">Jou Afrigternaam</string>
+    <string name="register">Registreer</string>
+    <string name="log_in">Teken in</string>
+    <string name="contact_us">Kontak ons</string>
+    <string name="notifications">Kennisgewings</string>
+    <string name="app_settings">App-instellings</string>
+    <string name="welcome_trainer">Welkom, Afrigter!</string>
+    <string name="logout">Teken uit</string>
+    <string name="notifications2">Kennisgewings</string>
+    <string name="english">Engels</string>
+    <string name="language">Taal</string>
+    <string name="sync_data">Sinkroniseer data</string>
+    <string name="settings2">Instellings</string>
+    <string name="biometrics">Biometrie</string>
+</resources>
