@@ -79,5 +79,20 @@ class PokemonRepository(private val pokemonDao: PokemonDao) {
             null
         }
     }
+
+    /**
+     * Fetches species-specific information for a Pokémon, which contains flavor texts.
+     * This is an ONLINE-only operation.
+     */
+    suspend fun getPokemonSpeciesById(id: Int): me.sargunvohra.lib.pokekotlin.model.PokemonSpecies? {
+        return try {
+            withContext(Dispatchers.IO) {
+                pokeApiService.getPokemonSpecies(id)
+            }
+        } catch (e: Exception) {
+            Log.e("Repository", "Failed to fetch species data for #$id", e)
+            null
+        }
+    }
 }
 

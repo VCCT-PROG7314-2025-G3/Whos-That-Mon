@@ -26,6 +26,10 @@ class AccountScreen : AppCompatActivity() {
             insets
         }
 
+        binding.button.setOnClickListener {
+            startActivity(Intent(this, AccountSettings::class.java))
+        }
+
         val bottomNavView = binding.bottomNavContainer.bottomNavigationView
 
         bottomNavView.selectedItemId = R.id.nav_profile

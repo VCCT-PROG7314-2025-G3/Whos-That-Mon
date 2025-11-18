@@ -46,7 +46,21 @@
             app:layout_constraintTop_toBottomOf="@id/tvPokemonName"
             tools:text="#001" />
 
-        <!-- NEW: TextView for Types -->
+        <!-- NEW: TextView for Height and Weight -->
+        <TextView
+            android:id="@+id/tvPokemonHeightWeight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvPokemonNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvPokemonNumber"
+            app:layout_constraintTop_toTopOf="@id/tvPokemonNumber"
+            tools:text="Height: 0.7m / Weight: 6.9kg" />
+
+        <!-- The tvPokemonTypes TextView now constrains to tvPokemonNumber -->
         <TextView
             android:id="@+id/tvPokemonTypes"
             android:layout_width="0dp"
@@ -69,6 +83,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivPokemonSprite"
             tools:text="HP: 45, Atk: 49, Def: 49" />
+
+        <TextView
+            android:id="@+id/tvPokemonFlavorText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#F5F5F5"
+            android:padding="8dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvPokemonStats"
+            tools:text="A strange seed was planted on its back at birth. The plant sprouts and grows with this POKéMON." />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

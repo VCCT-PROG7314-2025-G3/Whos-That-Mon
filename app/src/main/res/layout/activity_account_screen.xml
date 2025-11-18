@@ -8,8 +8,6 @@
     android:background="@drawable/pokedex_background"
     tools:context=".ui.AccountScreen">
 
-
-
     <Button
         android:id="@+id/button"
         android:layout_width="172dp"
