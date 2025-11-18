@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.poe.whosthatmon"
-    compileSdk = 36
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.poe.whosthatmon"
@@ -90,6 +90,10 @@ dependencies {
 
     // PokeAPI Kotlin implementation
     implementation("com.github.PokeAPI:pokekotlin:2.3.1")
+
+    //biometrics
+    implementation(libs.androidx.biometric)
+    implementation(libs.androidx.security.crypto)
 
 
 }
