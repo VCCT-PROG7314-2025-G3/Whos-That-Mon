@@ -25,13 +25,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTrainerName"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:background="@drawable/textbox_border"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
         android:hint="@string/your_trainer_name"
-        app:layout_constraintTop_toBottomOf="@id/tvSignUpTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tvSignUpTitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -43,12 +46,15 @@
         android:id="@+id/etEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="368dp"
+        android:background="@drawable/textbox_border"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
         android:hint="@string/email_address"
-        app:layout_constraintTop_toBottomOf="@id/tilTrainerName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/tilTrainerName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -60,35 +66,38 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/etPassword"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:background="@drawable/textbox_border"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginTop="4dp"
         android:hint="@string/password"
-        app:passwordToggleEnabled="true"
-        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:fontFamily="@font/orange_kid"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
         android:id="@+id/cbBiometric"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_marginTop="452dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:fronthFamily="@font/orange_kid"
         android:text="Enable the Fingerprint Login"
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
     <Button
         android:id="@+id/btnRegister"
