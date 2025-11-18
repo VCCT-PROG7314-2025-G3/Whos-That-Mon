@@ -100,18 +100,25 @@ class MainActivity : AppCompatActivity() {
             if (pokemonList.isNotEmpty() && viewModel.randomPokemon.value == null) {
                 // If the list is ready and we haven't picked a Pokémon yet, pick one.
                 viewModel.fetchRandomPokemonFromLocal()
+                // Enable the UI once the list is confirmed to be ready
+                binding.etGuess.isEnabled = true
+                binding.btnSubmitGuess.isEnabled = true
             } else if (pokemonList.isEmpty()) {
-                // Show a loading/preparation indicator
+                // Show a loading/preparation indicator and disable UI while the DB is populating
                 binding.etGuess.hint = "Loading Pokémon..."
+                binding.etGuess.isEnabled = false
+                binding.btnSubmitGuess.isEnabled = false
             }
         }
 
         // This observes the single random Pokémon chosen for the current round.
-        viewModel.randomPokemon.observe(this) { pokemon ->
-            binding.etGuess.hint = "Who's That Pokémon?"
-            currentPokemonName = pokemon.name
-            currentPokemonId = pokemon.id
-            binding.ivPokemon.load(pokemon.spriteUrl) {
+        viewModel.randomPokemon.observe(this) { localPokemon ->
+            // Use the LocalPokemon object directly from the database for ALL data.
+            currentPokemonName = localPokemon.name
+            currentPokemonId = localPokemon.id
+
+            // Use the spriteUrl that we saved in our local database.
+            binding.ivPokemon.load(localPokemon.spriteUrl) {
                 listener(onStart = { applySilhouette() })
                 error(R.drawable.pokebal_bg)
             }
