@@ -88,9 +88,8 @@
     <CheckBox
         android:id="@+id/cbBiometric"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:fronthFamily="@font/orange_kid"
+        android:layout_marginTop="452dp"
+        android:fontFamily="@font/orange_kid"
         android:text="Enable the Fingerprint Login"
         android:textColor="#000000"
         android:textSize="18sp"
