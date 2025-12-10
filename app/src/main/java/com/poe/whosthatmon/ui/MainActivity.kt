@@ -98,16 +98,14 @@ class MainActivity : AppCompatActivity() {
         // This observes the master list from the database.
         viewModel.allLocalPokemon.observe(this) { pokemonList ->
             if (pokemonList.isNotEmpty() && viewModel.randomPokemon.value == null) {
+                hideLoadingIndicator()
                 // If the list is ready and we haven't picked a Pokémon yet, pick one.
                 viewModel.fetchRandomPokemonFromLocal()
                 // Enable the UI once the list is confirmed to be ready
                 binding.etGuess.isEnabled = true
                 binding.btnSubmitGuess.isEnabled = true
             } else if (pokemonList.isEmpty()) {
-                // Show a loading/preparation indicator and disable UI while the DB is populating
-                binding.etGuess.hint = "Loading Pokémon..."
-                binding.etGuess.isEnabled = false
-                binding.btnSubmitGuess.isEnabled = false
+                showLoadingIndicator()
             }
         }
 
@@ -126,7 +124,22 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.error.observe(this) { message ->
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+            hideLoadingIndicator()
         }
+    }
+
+    private fun showLoadingIndicator() {
+        binding.pbLoading.visibility = View.VISIBLE
+        binding.tvLoadingMessage.visibility = View.VISIBLE
+        binding.etGuess.hint = "Loading Pokémon..."
+        binding.etGuess.isEnabled = false
+        binding.btnSubmitGuess.isEnabled = false
+    }
+
+    private fun hideLoadingIndicator() {
+        binding.pbLoading.visibility = View.GONE
+        binding.tvLoadingMessage.visibility = View.GONE
+        binding.etGuess.hint = "Who is it...?" // Set back to default hint
     }
 
     private fun resetForNextPokemon() {

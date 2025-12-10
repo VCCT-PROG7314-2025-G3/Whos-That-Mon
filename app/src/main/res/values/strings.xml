@@ -19,4 +19,6 @@
     <string name="sync_data">Sync Data</string>
     <string name="settings2">Settings</string>
     <string name="biometrics">Biometrics</string>
+    <string name="notifications_enabled_title">Notifications Enabled</string>
+    <string name="notifications_enabled_message">You will now receive updates from the world of Pokémon!</string>
 </resources>

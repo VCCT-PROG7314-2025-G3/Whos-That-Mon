@@ -20,4 +20,6 @@
     <string name="sync_data">Sinkroniseer data</string>
     <string name="settings2">Instellings</string>
     <string name="biometrics">Biometrie</string>
+    <string name="notifications_enabled_title">Kennisgewings Geaktiveer</string>
+    <string name="notifications_enabled_message">Jy sal nou opdaterings van die Pokémon-wêreld ontvang!</string>
 </resources>

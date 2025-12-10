@@ -20,4 +20,6 @@
     <string name="sync_data">Dibanisa idatha</string>
     <string name="settings2">Iisetingi</string>
     <string name="biometrics">I-Biometrics</string>
+    <string name="notifications_enabled_title">Izaziso zinikwe amandla</string>
+    <string name="notifications_enabled_message">Ngoku uya kufumana uhlaziyo oluvela kwihlabathi lePokémon!</string>
 </resources>
